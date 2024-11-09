@@ -17,9 +17,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Todo List'),
-      ),
       body: tabs[currentTabIndex],
       bottomNavigationBar: ClipRRect(
         borderRadius: BorderRadius.circular(20),
