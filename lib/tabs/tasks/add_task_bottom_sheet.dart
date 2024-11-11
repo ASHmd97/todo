@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:todo/app_theme.dart';
+import 'package:todo/models/task_model.dart';
 import 'package:todo/widgets/custom_elevated_button.dart';
 import 'package:todo/widgets/default_text_form_field.dart';
 
@@ -83,8 +84,11 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                 label: 'Add Task',
                 onPressed: () {
                   if (formKey.currentState!.validate()) {
-                    print('title: ${titleController.text}');
-                    print('description: ${descriptionController.text}');
+                    TaskModel task = TaskModel(
+                      title: titleController.text,
+                      description: descriptionController.text,
+                      date: selectedDate,
+                    );
                   }
                 },
               ),

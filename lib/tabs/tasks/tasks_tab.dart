@@ -1,10 +1,20 @@
 import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:todo/app_theme.dart';
+import 'package:todo/models/task_model.dart';
 import 'package:todo/tabs/tasks/task_item.dart';
 
+// ignore: must_be_immutable
 class TasksTab extends StatelessWidget {
-  const TasksTab({super.key});
+  TasksTab({super.key});
+
+  List<TaskModel> tasks = List.generate(
+      10,
+      (index) => TaskModel(
+            title: 'title $index',
+            description: 'description $index',
+            date: DateTime.now(),
+          ));
 
   @override
   Widget build(BuildContext context) {
@@ -76,8 +86,8 @@ class TasksTab extends StatelessWidget {
         Expanded(
           child: ListView.builder(
               padding: const EdgeInsets.only(top: 20),
-              itemBuilder: (context, index) => const TaskItem(),
-              itemCount: 10),
+              itemBuilder: (_, index) => TaskItem(tasks[index]),
+              itemCount: tasks.length),
         ),
       ],
     );

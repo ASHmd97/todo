@@ -12,7 +12,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<Widget> tabs = const [TasksTab(), SettingsTab()];
+  List<Widget> tabs = [TasksTab(), const SettingsTab()];
   int currentTabIndex = 0;
 
   @override
