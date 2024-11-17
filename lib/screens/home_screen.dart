@@ -12,44 +12,48 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<Widget> tabs = [TasksTab(), const SettingsTab()];
+  List<Widget> tabs = [const TasksTab(), const SettingsTab()];
   int currentTabIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: tabs[currentTabIndex],
-      bottomNavigationBar: ClipRRect(
-        borderRadius: BorderRadius.circular(20),
-        child: BottomAppBar(
-          shape: const CircularNotchedRectangle(),
-          notchMargin: 12,
-          clipBehavior: Clip.antiAliasWithSaveLayer,
-          padding: EdgeInsets.zero,
-          child: BottomNavigationBar(
-            currentIndex: currentTabIndex,
-            onTap: (index) {
-              setState(() {
-                currentTabIndex = index;
-              });
-            },
-            elevation: 0,
-            items: const [
-              BottomNavigationBarItem(
-                icon: Icon(Icons.list, size: 32),
-                label: 'Tasks',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.settings, size: 32),
-                label: 'Settings',
-              ),
-            ],
+      bottomNavigationBar: SizedBox(
+        height: MediaQuery.of(context).size.height * 0.12,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(20),
+          child: BottomAppBar(
+            shape: const CircularNotchedRectangle(),
+            notchMargin: 12,
+            clipBehavior: Clip.antiAliasWithSaveLayer,
+            padding: EdgeInsets.zero,
+            child: BottomNavigationBar(
+              currentIndex: currentTabIndex,
+              onTap: (index) {
+                setState(() {
+                  currentTabIndex = index;
+                });
+              },
+              elevation: 0,
+              items: const [
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.list, size: 32),
+                  label: 'Tasks',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.settings, size: 32),
+                  label: 'Settings',
+                ),
+              ],
+            ),
           ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showModalBottomSheet(
+            isScrollControlled: true,
             context: context,
             builder: (context) => const AddTaskBottomSheet(),
           );
