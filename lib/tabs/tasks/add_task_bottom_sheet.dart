@@ -1,6 +1,9 @@
 // ignore_for_file: avoid_print, use_build_context_synchronously
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:todo/app_theme.dart';
@@ -130,12 +133,27 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
     FirebaseFunctions.addTaskToFirestore(task).timeout(
       const Duration(milliseconds: 10),
       onTimeout: () {
+        Fluttertoast.showToast(
+            msg: "Task Added Successful",
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 5,
+            backgroundColor: AppTheme.green,
+            textColor: Colors.white,
+            fontSize: 18.0);
         Navigator.of(context).pop();
         Provider.of<TasksProvider>(context, listen: false).getTasks();
       },
     ).catchError(
       (e) {
-        print(e);
+        Fluttertoast.showToast(
+            msg: "Something went wrong",
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 5,
+            backgroundColor: AppTheme .red,
+            textColor: Colors.white,
+            fontSize: 18.0);
       },
     );
   }
